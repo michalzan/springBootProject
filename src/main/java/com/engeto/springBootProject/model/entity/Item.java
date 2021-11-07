@@ -1,4 +1,4 @@
-package com.engeto.springBootProject.model;
+package com.engeto.springBootProject.model.entity;
 
 import org.hibernate.annotations.Type;
 

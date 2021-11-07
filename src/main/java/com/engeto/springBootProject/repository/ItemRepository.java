@@ -1,6 +1,6 @@
 package com.engeto.springBootProject.repository;
 
-import com.engeto.springBootProject.model.Item;
+import com.engeto.springBootProject.model.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

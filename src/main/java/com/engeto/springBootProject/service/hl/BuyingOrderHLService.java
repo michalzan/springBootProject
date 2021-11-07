@@ -1,8 +1,8 @@
 package com.engeto.springBootProject.service.hl;
 
-import com.engeto.springBootProject.model.BuyingOrder;
-import com.engeto.springBootProject.model.Item;
-import com.engeto.springBootProject.model.User;
+import com.engeto.springBootProject.model.entity.BuyingOrder;
+import com.engeto.springBootProject.model.entity.Item;
+import com.engeto.springBootProject.model.entity.User;
 import com.engeto.springBootProject.service.BuyingOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

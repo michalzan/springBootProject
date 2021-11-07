@@ -1,6 +1,6 @@
 package com.engeto.springBootProject.service;
 
-import com.engeto.springBootProject.model.Item;
+import com.engeto.springBootProject.model.entity.Item;
 import com.engeto.springBootProject.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
