@@ -1,20 +1,27 @@
 package com.engeto.springBootProject.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 public class User {
 
     @Id
+    @Type(type = "uuid-char")
     private UUID id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String login;
     @Column(nullable = false)
     private String password;
     private boolean isAdmin;
+    @OneToMany(mappedBy = "user")
+    private List<BuyingOrder> buyingOrders;
 
     public User() {
     }
@@ -24,10 +31,6 @@ public class User {
         this.login = login;
         this.password = password;
         this.isAdmin = isAdmin;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public UUID getId() {
@@ -56,5 +59,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public List<BuyingOrder> getOrders() {
+        return buyingOrders;
+    }
+
+    public void setOrders(List<BuyingOrder> buyingOrders) {
+        this.buyingOrders = buyingOrders;
     }
 }

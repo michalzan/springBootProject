@@ -1,0 +1,36 @@
+package com.engeto.springBootProject.service;
+
+import com.engeto.springBootProject.model.Item;
+import com.engeto.springBootProject.repository.ItemRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class ItemService {
+
+    private final ItemRepository itemRepository;
+
+    @Autowired
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
+    public Item saveItem(Item item) {
+        return itemRepository.save(item);
+    }
+
+    public Item getById(UUID id) {
+        return itemRepository.getById(id);
+    }
+
+    public Item getByName(String name) {
+        return itemRepository.getByName(name);
+    }
+}
