@@ -1,6 +1,8 @@
 package com.engeto.springBootProject.config;
 
 import com.engeto.springBootProject.model.exception.DuplicateEntityException;
+import com.engeto.springBootProject.model.exception.ForbiddenException;
+import com.engeto.springBootProject.model.exception.NotFoundException;
 import com.engeto.springBootProject.model.response.ErrorResponse;
 import com.engeto.springBootProject.model.response.ValidationErrorResponse;
 import com.engeto.springBootProject.model.response.Violation;
@@ -19,7 +21,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    ValidationErrorResponse onMethodArgumentNotValidException(
+    public ValidationErrorResponse onMethodArgumentNotValidException(
             MethodArgumentNotValidException e) {
         ValidationErrorResponse error = new ValidationErrorResponse();
         for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
@@ -34,6 +36,20 @@ public class CustomExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body(new ErrorResponse(HttpStatus.CONFLICT.value(), exception.getMessage()));
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException exception) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(new ErrorResponse(HttpStatus.FORBIDDEN.value(), exception.getMessage()));
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleForbiddenException(NotFoundException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), exception.getMessage()));
     }
 
 }

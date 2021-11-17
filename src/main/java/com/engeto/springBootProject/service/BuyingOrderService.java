@@ -1,7 +1,6 @@
 package com.engeto.springBootProject.service;
 
 import com.engeto.springBootProject.model.entity.BuyingOrder;
-import com.engeto.springBootProject.model.entity.User;
 import com.engeto.springBootProject.repository.BuyingOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,16 @@ public class BuyingOrderService {
         return buyingOrderRepository.getById(id);
     }
 
-    public List<BuyingOrder> getByingOrdersForUser(User user) {
-        return buyingOrderRepository.getBuyingOrderByUser(user);
+    public List<BuyingOrder> getAllBuyingOrders() {
+        return buyingOrderRepository.findAll();
+    }
+
+    public List<BuyingOrder> getPendingBuyingOrders() {
+        return buyingOrderRepository.getAllByPending(true);
+    }
+
+    public BuyingOrder saveBuyingOrder(BuyingOrder order) {
+        return buyingOrderRepository.save(order);
     }
 
 }

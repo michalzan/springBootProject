@@ -14,8 +14,7 @@ public class BuyingOrder {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @ManyToOne
-    private User user;
+    private String address;
 
     @ManyToMany
     @JoinTable(
@@ -30,10 +29,10 @@ public class BuyingOrder {
     public BuyingOrder() {
     }
 
-    public BuyingOrder(UUID id, User user, List<Item> items, boolean pending) {
+    public BuyingOrder(UUID id, String address, List<Item> items, boolean pending) {
         this.id = id == null ? UUID.randomUUID() : id;
-        this.user = user;
         this.items = items;
+        this.address = address;
         this.pending = pending;
     }
 
@@ -41,12 +40,12 @@ public class BuyingOrder {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public List<Item> getItems() {
