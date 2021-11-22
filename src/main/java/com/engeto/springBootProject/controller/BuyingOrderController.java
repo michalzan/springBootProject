@@ -2,7 +2,7 @@ package com.engeto.springBootProject.controller;
 
 import com.engeto.springBootProject.model.entity.BuyingOrder;
 import com.engeto.springBootProject.model.request.BuyingOrderRequest;
-import com.engeto.springBootProject.model.request.ConfirmOrder;
+import com.engeto.springBootProject.model.request.ConfirmOrderRequest;
 import com.engeto.springBootProject.service.hl.BuyingOrderHLService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ public class BuyingOrderController {
     }
 
     @PostMapping("/confirm")
-    public BuyingOrder confirmBuyingOrder(@RequestBody ConfirmOrder request) {
+    public BuyingOrder confirmBuyingOrder(@RequestBody ConfirmOrderRequest request) {
         return service.confirmOrder(request.getOrderId());
     }
 }

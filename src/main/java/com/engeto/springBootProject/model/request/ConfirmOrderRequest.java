@@ -2,14 +2,14 @@ package com.engeto.springBootProject.model.request;
 
 import java.util.UUID;
 
-public class ConfirmOrder {
+public class ConfirmOrderRequest {
 
     private UUID orderId;
 
-    public ConfirmOrder() {
+    public ConfirmOrderRequest() {
     }
 
-    public ConfirmOrder(UUID orderId) {
+    public ConfirmOrderRequest(UUID orderId) {
         this.orderId = orderId;
     }
 

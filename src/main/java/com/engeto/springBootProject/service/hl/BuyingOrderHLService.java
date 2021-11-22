@@ -1,14 +1,17 @@
 package com.engeto.springBootProject.service.hl;
 
 import com.engeto.springBootProject.model.entity.BuyingOrder;
+import com.engeto.springBootProject.model.entity.BuyingOrderItem;
 import com.engeto.springBootProject.model.entity.Item;
 import com.engeto.springBootProject.model.exception.ForbiddenException;
 import com.engeto.springBootProject.model.exception.NotFoundException;
+import com.engeto.springBootProject.model.request.OrderItem;
 import com.engeto.springBootProject.service.BuyingOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,13 +28,14 @@ public class BuyingOrderHLService {
     }
 
     @Transactional
-    public BuyingOrder createBuyingOrder(List<Item> items, String address) {
+    public BuyingOrder createBuyingOrder(List<OrderItem> orderItems, String address) {
         if (address == null || address.isEmpty()) throw new ForbiddenException("Unknown address!");
-        BuyingOrder order = new BuyingOrder();
-        items.forEach(item -> {
-            itemHLService.orderItem(item.getName(), item.getAmount());
-            order.getItems().add(item);
+        List<BuyingOrderItem> validItems = new ArrayList<>();
+        orderItems.forEach(orderItem -> {
+            Item item = itemHLService.orderItem(orderItem.getItemName(), orderItem.getAmount());
+            validItems.add(new BuyingOrderItem(null, item, orderItem.getAmount()));
         });
+        BuyingOrder order = new BuyingOrder(null, address, validItems, true);
         order.setAddress(address);
         return buyingOrderService.saveBuyingOrder(order);
     }

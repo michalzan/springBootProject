@@ -1,6 +1,7 @@
 package com.engeto.springBootProject.service.hl;
 
 import com.engeto.springBootProject.model.entity.Item;
+import com.engeto.springBootProject.model.exception.BadRequestException;
 import com.engeto.springBootProject.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,9 @@ public class ItemHLService {
 
     public Item orderItem(String name, long amount) {
         Item item = itemService.getByName(name);
+        if (item.getAmount() < amount) {
+            throw new BadRequestException("Not enough items: " + name);
+        }
         item.setAmount(item.getAmount() - amount);
         return itemService.saveItem(item);
     }

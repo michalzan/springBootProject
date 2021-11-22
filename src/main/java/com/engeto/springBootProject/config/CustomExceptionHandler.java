@@ -1,5 +1,6 @@
 package com.engeto.springBootProject.config;
 
+import com.engeto.springBootProject.model.exception.BadRequestException;
 import com.engeto.springBootProject.model.exception.DuplicateEntityException;
 import com.engeto.springBootProject.model.exception.ForbiddenException;
 import com.engeto.springBootProject.model.exception.NotFoundException;
@@ -50,6 +51,13 @@ public class CustomExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), exception.getMessage()));
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), exception.getMessage()));
     }
 
 }

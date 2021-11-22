@@ -7,6 +7,7 @@ public class AddItemRequest {
 
     @Size(min = 3, max = 255)
     private String name;
+
     @Min(1)
     private Long amount;
 
