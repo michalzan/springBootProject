@@ -16,15 +16,15 @@ public class BuyingOrderItem {
 
     @ManyToOne
     private Item item;
-    private long amount;
+    private long orderAmount;
 
     public BuyingOrderItem() {
     }
 
-    public BuyingOrderItem(UUID id, Item item, long amount) {
+    public BuyingOrderItem(UUID id, Item item, long orderAmount) {
         this.id = id == null ? UUID.randomUUID() : id;
         this.item = item;
-        this.amount = amount;
+        this.orderAmount = orderAmount;
     }
 
     public UUID getId() {
@@ -43,11 +43,11 @@ public class BuyingOrderItem {
         this.item = item;
     }
 
-    public long getAmount() {
-        return amount;
+    public long getOrderAmount() {
+        return orderAmount;
     }
 
-    public void setAmount(long amount) {
-        this.amount = amount;
+    public void setOrderAmount(long amount) {
+        this.orderAmount = amount;
     }
 }

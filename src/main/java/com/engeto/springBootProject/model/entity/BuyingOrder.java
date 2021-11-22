@@ -16,7 +16,7 @@ public class BuyingOrder {
 
     private String address;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "buying_order_buying_order_item",
             joinColumns = { @JoinColumn(name = "buying_order_id") },
