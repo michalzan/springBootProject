@@ -1,9 +1,11 @@
 package com.engeto.springBootProject.model.entity;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.UUID;
 
@@ -11,17 +13,24 @@ import java.util.UUID;
 public class Item {
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Type(type = "uuid-char")
     private UUID id;
+
     @Column(unique = true)
     private String name;
+
     private long amount;
 
     public Item() {
     }
 
     public Item(UUID id, String name, long amount) {
-        this.id = id == null ? UUID.randomUUID() : id;
+        this.id = id;
         this.name = name;
         this.amount = amount;
     }
