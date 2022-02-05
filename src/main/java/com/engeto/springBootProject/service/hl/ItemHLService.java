@@ -18,11 +18,6 @@ public class ItemHLService {
         this.itemService = itemService;
     }
 
-    public boolean isItemAvailable(String name, long amount) {
-        Item item = itemService.getByName(name);
-        return item != null && item.getAmount() >= amount;
-    }
-
     public Item addItem(String name, long amount) {
         Item item = itemService.getByName(name);
         if (item == null) {
@@ -32,16 +27,21 @@ public class ItemHLService {
         return itemService.saveItem(item);
     }
 
-    public List<Item> getAllItems() {
-        return itemService.getAllItems();
-    }
-
     public Item orderItem(String name, long amount) {
         Item item = itemService.getByName(name);
-        if (item.getAmount() < amount) {
+        if (!isItemAvailable(name, amount)) {
             throw new BadRequestException("Not enough items: " + name);
         }
         item.setAmount(item.getAmount() - amount);
         return itemService.saveItem(item);
+    }
+
+    private boolean isItemAvailable(String name, long amount) {
+        Item item = itemService.getByName(name);
+        return item != null && item.getAmount() >= amount;
+    }
+
+    public List<Item> getAllItems() {
+        return itemService.getAllItems();
     }
 }

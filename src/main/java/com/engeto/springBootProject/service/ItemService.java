@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ItemService {
@@ -24,10 +23,6 @@ public class ItemService {
 
     public Item saveItem(Item item) {
         return itemRepository.save(item);
-    }
-
-    public Item getById(UUID id) {
-        return itemRepository.getById(id);
     }
 
     public Item getByName(String name) {

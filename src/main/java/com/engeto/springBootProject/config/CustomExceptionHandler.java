@@ -1,7 +1,6 @@
 package com.engeto.springBootProject.config;
 
 import com.engeto.springBootProject.model.exception.BadRequestException;
-import com.engeto.springBootProject.model.exception.DuplicateEntityException;
 import com.engeto.springBootProject.model.exception.ForbiddenException;
 import com.engeto.springBootProject.model.exception.NotFoundException;
 import com.engeto.springBootProject.model.response.ErrorResponse;
@@ -30,13 +29,6 @@ public class CustomExceptionHandler {
                     new Violation(fieldError.getField(), fieldError.getDefaultMessage()));
         }
         return error;
-    }
-
-    @ExceptionHandler(DuplicateEntityException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateEntityException(DuplicateEntityException exception) {
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(new ErrorResponse(HttpStatus.CONFLICT.value(), exception.getMessage()));
     }
 
     @ExceptionHandler(ForbiddenException.class)
